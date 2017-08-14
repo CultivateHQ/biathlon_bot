@@ -1,10 +1,10 @@
 defmodule SensorFw.Mixfile do
   use Mix.Project
 
-  @target case Mix.env do
-            :prod -> "rpi0"
-            _ -> "host"
-          end
+  @target (case Mix.env do
+             :prod -> "rpi0"
+             _ -> "host"
+           end)
 
   Mix.shell.info([:green, """
   Mix environment
@@ -28,9 +28,6 @@ defmodule SensorFw.Mixfile do
      deps: deps()]
   end
 
-  # Configuration for the OTP application.
-  #
-  # Type `mix help compile.app` for more information.
   def application, do: application(@target)
 
   # Specify target specific application configurations
@@ -57,6 +54,9 @@ defmodule SensorFw.Mixfile do
   def deps do
     [
       {:nerves, "~> 0.7", runtime: false},
+      {:light_sensor, in_umbrella: true},
+      {:sensor_trigger_reactions, in_umbrella: true},
+      {:local_events, in_umbrella: true},
     ] ++
     deps(@target)
   end

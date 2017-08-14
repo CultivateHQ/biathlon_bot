@@ -1,5 +1,6 @@
 %{"bootloader": {:hex, :bootloader, "0.1.2", "835ddcf50b796714658f342061d5d48ebc34cbd0d81cdbd5a5a8ae00705d72b1", [:mix], [{:distillery, "~> 1.0", [hex: :distillery, repo: "hexpm", optional: false]}], "hexpm"},
   "distillery": {:hex, :distillery, "1.4.1", "546d851bf27ae8fe0727e10e4fc4e146ad836eecee138263a60431e688044ed3", [:mix], [], "hexpm"},
+  "elixir_ale": {:hex, :elixir_ale, "1.0.0", "e1e4b01cfdce54bf93cf09971bb75b76422a818fe97c9a1622a72d8ee32f61a8", [], [{:elixir_make, "~> 0.4", [hex: :elixir_make, repo: "hexpm", optional: false]}], "hexpm"},
   "elixir_make": {:hex, :elixir_make, "0.4.0", "992f38fabe705bb45821a728f20914c554b276838433349d4f2341f7a687cddf", [:mix], [], "hexpm"},
   "nerves": {:hex, :nerves, "0.7.2", "280ff39e3df621d6f54c75fb039e5f15579ca6f18b3d57f56287b409a07c8ddc", [:mix], [{:distillery, "~> 1.4", [hex: :distillery, repo: "hexpm", optional: false]}], "hexpm"},
   "nerves_runtime": {:hex, :nerves_runtime, "0.4.3", "e99a0744a29d8a2a9821d2489a7b9d072a29669df320e6addfdd2e54a96820d3", [:make, :mix], [{:elixir_make, "~> 0.4", [hex: :elixir_make, repo: "hexpm", optional: false]}, {:system_registry, "~> 0.5", [hex: :system_registry, repo: "hexpm", optional: false]}], "hexpm"},
