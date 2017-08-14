@@ -57,6 +57,7 @@ defmodule SensorFw.Mixfile do
       {:light_sensor, in_umbrella: true},
       {:sensor_trigger_reactions, in_umbrella: true},
       {:local_events, in_umbrella: true},
+      {:wifi, in_umbrella: true},
     ] ++
     deps(@target)
   end
