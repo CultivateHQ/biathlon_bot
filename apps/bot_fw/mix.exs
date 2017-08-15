@@ -58,6 +58,7 @@ defmodule BotFw.Mixfile do
       {:wifi, in_umbrella: true},
       {:laser, in_umbrella: true},
       {:locomotion, in_umbrella: true},
+      {:web, in_umbrella: true},
     ] ++
     deps(@target)
   end
