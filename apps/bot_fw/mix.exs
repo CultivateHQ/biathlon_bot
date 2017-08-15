@@ -1,10 +1,8 @@
-defmodule SensorFw.Mixfile do
+defmodule BotFw.Mixfile do
   use Mix.Project
 
   @target (case Mix.env do
-             :prod ->
-               Application.put_env(:bootloader, :main_app, :sensor_fw)
-               "rpi0"
+             :prod -> "rpi0"
              _ -> "host"
            end)
 
@@ -15,7 +13,7 @@ defmodule SensorFw.Mixfile do
   """, :reset])
 
   def project do
-    [app: :sensor_fw,
+    [app: :bot_fw,
      version: "0.1.0",
      elixir: "~> 1.5",
      target: @target,
@@ -35,12 +33,12 @@ defmodule SensorFw.Mixfile do
   # Specify target specific application configurations
   # It is common that the application start function will start and supervise
   # applications which could cause the host to fail. Because of this, we only
-  # invoke SensorFw.start/2 when running on a target.
+  # invoke BotFw.start/2 when running on a target.
   def application("host") do
     [extra_applications: [:logger]]
   end
   def application(_target) do
-    [mod: {SensorFw.Application, []},
+    [mod: {BotFw.Application, []},
      extra_applications: [:logger]]
   end
 
@@ -56,10 +54,9 @@ defmodule SensorFw.Mixfile do
   def deps do
     [
       {:nerves, "~> 0.7", runtime: false},
-      {:light_sensor, in_umbrella: true},
-      {:sensor_trigger_reactions, in_umbrella: true},
       {:local_events, in_umbrella: true},
       {:wifi, in_umbrella: true},
+      {:laser, in_umbrella: true},
     ] ++
     deps(@target)
   end
@@ -89,5 +86,4 @@ defmodule SensorFw.Mixfile do
     ["deps.precompile": ["nerves.precompile", "deps.precompile"],
      "deps.loadpaths":  ["deps.loadpaths", "nerves.loadpaths"]]
   end
-
 end
