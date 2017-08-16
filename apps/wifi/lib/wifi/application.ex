@@ -6,6 +6,7 @@ defmodule Wifi.Application do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
     children = [
+      worker(Wifi.DistributeNode, [node_name()]),
       supervisor(Wifi.NetworkWrapperSupervisor, []),
       worker(Wifi.Ntp, [ntp_servers()]),
     ]
@@ -16,5 +17,9 @@ defmodule Wifi.Application do
 
   defp ntp_servers do
     Application.fetch_env!(:wifi, :ntp_servers)
+  end
+
+  defp node_name do
+    Application.fetch_env!(:wifi, :node_name)
   end
 end

@@ -26,6 +26,7 @@ defmodule Wifi.NetworkWrapper do
   if Mix.env == :prod do
     defp kernel_init do
       {_, 0} = System.cmd("modprobe", ["brcmfmac"])
+      {_, 0} = System.cmd("epmd", ["-daemon"])
       :ok
     end
   else

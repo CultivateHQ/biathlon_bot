@@ -4,7 +4,7 @@ defmodule LocalEvents do
   events to be broadcat to a topic
   """
 
-
+  MoistureFwMoistureFw
   @doc """
   Subscribe the current process to the topic
   """
