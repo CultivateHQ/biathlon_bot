@@ -27,6 +27,8 @@ defmodule Wifi.Mixfile do
   defp deps do
     [
       {:nerves_network, "~> 0.3", only: :prod},
+      {:inet_tcp_dist, git: "git@github.com:tverlaan/inet_tcp_dist.git"},
+      {:dummy_nerves, path: "../../../dummy_nerves", only: [:dev, :test]}, # replace with git / hex link
     ]
   end
 end

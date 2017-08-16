@@ -3,16 +3,15 @@ defmodule Wifi do
   Documentation for Wifi.
   """
 
-  @doc """
-  Hello world.
+  alias Wifi.{Settings, NetworkWrapperSupervisor, NetworkWrapper}
 
-  ## Examples
+  def set(ssid, secret) do
+    Settings.set(settings_file(), {ssid, secret})
+    Supervisor.terminate_child(NetworkWrapperSupervisor, NetworkWrapper)
+    {:ok, _pid} =  Supervisor.restart_child(NetworkWrapperSupervisor, NetworkWrapper)
+  end
 
-      iex> Wifi.hello
-      :world
-
-  """
-  def hello do
-    :world
+  def settings_file() do
+    Application.fetch_env!(:wifi, :settings_file)
   end
 end

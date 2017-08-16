@@ -1,4 +1,4 @@
-defmodule WiFi.Ntp do
+defmodule Wifi.Ntp do
   @doc """
   `ntpd` can be used to set time, but it now no longer returns if it cannot resolve the timeserver.
   This can be a problem is the network isn't up yet.
@@ -41,7 +41,7 @@ defmodule WiFi.Ntp do
     if DateTime.utc_now.year > 2016 do
       @poll_after_time_set
     else
-      @poll_afer_not_set
+      @poll_after_not_set
     end
   end
 end
