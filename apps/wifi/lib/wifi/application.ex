@@ -7,6 +7,7 @@ defmodule Wifi.Application do
     import Supervisor.Spec, warn: false
     children = [
       worker(Wifi.DistributeNode, [node_name()]),
+      worker(Wifi.MulticastConnectNodes, [node_name()]),
       supervisor(Wifi.NetworkWrapperSupervisor, []),
       worker(Wifi.Ntp, [ntp_servers()]),
     ]
