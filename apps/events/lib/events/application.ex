@@ -1,4 +1,4 @@
-defmodule LocalEvents.Application do
+defmodule Events.Application do
   @moduledoc false
 
   use Application
@@ -7,10 +7,10 @@ defmodule LocalEvents.Application do
     import Supervisor.Spec, warn: false
 
     children = [
-      supervisor(Registry, [:duplicate,  :local_events_registry]),
+      supervisor(Registry, [:duplicate,  :events_registry]),
     ]
 
-    opts = [strategy: :one_for_one, name: LocalEvents.Supervisor]
+    opts = [strategy: :one_for_one, name: Events.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end

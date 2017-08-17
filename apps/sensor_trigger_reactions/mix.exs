@@ -26,7 +26,7 @@ defmodule SensorTriggerReactions.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:local_events, in_umbrella: true},
+      {:events, in_umbrella: true},
       {:dummy_nerves, path: "../../../dummy_nerves", only: [:dev, :test]}, # replace with git / hex link
     ]
   end

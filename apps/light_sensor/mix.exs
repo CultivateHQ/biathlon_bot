@@ -28,7 +28,7 @@ defmodule LightSensor.Mixfile do
     [
       {:dummy_nerves, path: "../../../dummy_nerves", only: [:dev, :test]}, # replace with git / hex link
       {:elixir_ale, "~> 1.0", only: :prod},
-      {:local_events, in_umbrella: true},
+      {:events, in_umbrella: true},
     ]
   end
 end

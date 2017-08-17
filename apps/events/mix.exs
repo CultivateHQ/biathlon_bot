@@ -1,9 +1,9 @@
-defmodule LocalEvents.Mixfile do
+defmodule Events.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :local_events,
+      app: :events,
       version: "0.1.0",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
@@ -19,7 +19,7 @@ defmodule LocalEvents.Mixfile do
   def application do
     [
       extra_applications: [:logger],
-      mod: {LocalEvents.Application, []}
+      mod: {Events.Application, []}
     ]
   end
 

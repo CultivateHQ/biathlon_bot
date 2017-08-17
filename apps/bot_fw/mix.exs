@@ -54,7 +54,7 @@ defmodule BotFw.Mixfile do
   def deps do
     [
       {:nerves, "~> 0.7", runtime: false},
-      {:local_events, in_umbrella: true},
+      {:events, in_umbrella: true},
       {:wifi, in_umbrella: true},
       {:laser, in_umbrella: true},
       {:locomotion, in_umbrella: true},

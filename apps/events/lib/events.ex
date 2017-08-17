@@ -1,4 +1,4 @@
-defmodule LocalEvents do
+defmodule Events do
   @moduledoc """
   Enables a process to subscribe to events on a topic, and for
   events to be broadcat to a topic
@@ -10,7 +10,7 @@ defmodule LocalEvents do
   """
   @spec subscribe(String.t) ::  {:ok, pid} | {:error, {:already_registered, pid}}
   def subscribe(topic) do
-    Registry.register(:local_events_registry, topic, [])
+    Registry.register(:events_registry, topic, [])
   end
 
   @doc """
@@ -19,8 +19,8 @@ defmodule LocalEvents do
   """
   @spec broadcast(String.t, String.t) :: :ok
   def broadcast(topic, event) do
-    Registry.dispatch(:local_events_registry, topic, fn entries ->
-      for {pid, _} <- entries, do: send(pid, {:local_event, topic, event})
+    Registry.dispatch(:events_registry, topic, fn entries ->
+      for {pid, _} <- entries, do: send(pid, {:event, topic, event})
     end)
   end
 end

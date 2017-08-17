@@ -9,7 +9,7 @@ defmodule LightSensor.LightLevelMonitorTest do
     SPI.set_transfer_answer(SPI, << 0::size(16)>>)
     send(LightLevelMonitor, :read)
     :sys.get_state(LightLevelMonitor)
-    LocalEvents.subscribe(:light_level_triggers)
+    Events.subscribe(:light_level_triggers)
     :ok
   end
 
@@ -18,15 +18,15 @@ defmodule LightSensor.LightLevelMonitorTest do
     test "sends triggered event" do
       SPI.set_transfer_answer(SPI, << 0::size(6), trigger_threshold()::size(10)>>)
       send(LightLevelMonitor, :read)
-      assert_receive {:local_event, :light_level_triggers, :triggered}
+      assert_receive {:event, :light_level_triggers, :triggered}
     end
 
     test "sends only one triggered event" do
       SPI.set_transfer_answer(SPI, << 0::size(6), trigger_threshold()::size(10)>>)
       send(LightLevelMonitor, :read)
       send(LightLevelMonitor, :read)
-      assert_receive {:local_event, :light_level_triggers, :triggered}
-      refute_receive {:local_event, :light_level_triggers, :triggered}
+      assert_receive {:event, :light_level_triggers, :triggered}
+      refute_receive {:event, :light_level_triggers, :triggered}
     end
   end
 
@@ -34,15 +34,15 @@ defmodule LightSensor.LightLevelMonitorTest do
     test "untriggers and triggers again" do
       SPI.set_transfer_answer(SPI, << 0::size(6), trigger_threshold()::size(10)>>)
       send(LightLevelMonitor, :read)
-      assert_receive {:local_event, :light_level_triggers, :triggered}
+      assert_receive {:event, :light_level_triggers, :triggered}
 
       SPI.set_transfer_answer(SPI, << 0::size(6), (trigger_threshold() - 1)::size(10)>>)
       send(LightLevelMonitor, :read)
-      assert_receive {:local_event, :light_level_triggers, :untriggered}
+      assert_receive {:event, :light_level_triggers, :untriggered}
 
       SPI.set_transfer_answer(SPI, << 0::size(6), trigger_threshold()::size(10)>>)
       send(LightLevelMonitor, :read)
-      assert_receive {:local_event, :light_level_triggers, :triggered}
+      assert_receive {:event, :light_level_triggers, :triggered}
     end
   end
 

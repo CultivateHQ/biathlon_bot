@@ -29,8 +29,8 @@ defmodule LightSensor.LightLevelMonitor do
     {:noreply, %{s | triggered: triggered}}
   end
 
-  defp alert_if_needed(false, true), do: LocalEvents.broadcast(:light_level_triggers, :triggered)
-  defp alert_if_needed(true, false), do: LocalEvents.broadcast(:light_level_triggers, :untriggered)
+  defp alert_if_needed(false, true), do: Events.broadcast(:light_level_triggers, :triggered)
+  defp alert_if_needed(true, false), do: Events.broadcast(:light_level_triggers, :untriggered)
   defp alert_if_needed(_, _), do: nil
 
 
