@@ -23,7 +23,10 @@ defmodule Web.Router do
     case GameState.state do
       :started -> send_resp(conn, 200, "Hello" |> Html.control_page)
       :unstarted -> send_resp(conn, 200, Html.unstarted)
-      :finished -> send_resp(conn, 200, Html.finished)
+      :finished ->
+        # Horrible hack
+        Locomotion.stop
+        send_resp(conn, 200, Html.finished)
     end
   end
 
