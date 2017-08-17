@@ -54,6 +54,8 @@ defmodule Wifi.MulticastConnectNodes do
     {:noreply, s}
   end
 
+  def handle_info(_, s), do: {:noreply, s}
+
   defp node_connect(incoming_node) do
     case Node.connect(incoming_node) do
       true ->
