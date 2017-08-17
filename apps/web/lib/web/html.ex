@@ -12,6 +12,45 @@ defmodule Web.Html do
     @css
   end
 
+  def unstarted() do
+  """
+  <html>
+  <head>
+  <title>Cultivatormobile Control</title>
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" href="/cultivatormobile.css") %>">
+  </head>
+  <body>
+  <div class="controller">
+  <form action = "/start" method="post">
+  <button type="submit">Start! </button>
+  </form>
+  </div>
+  </head>
+  """
+  end
+
+  def finished do
+    time = GameState.finish_secs - GameState.start_secs
+  """
+  <html>
+  <head>
+  <title>Cultivatormobile Control</title>
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" href="/cultivatormobile.css") %>">
+  </head>
+  <body>
+  <div class="controller">
+  <h2>Your time is #{time} seconds</h2>
+  <p>You are awesome!</p>
+  <form action = "/reset" method="post">
+  <button type="submit">Reset</button>
+  </form>
+  </div>
+  </head>
+  """
+  end
+
   def control_page(message) do
     now = :erlang.universaltime
     """

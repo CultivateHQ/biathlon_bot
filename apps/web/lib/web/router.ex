@@ -20,11 +20,25 @@ defmodule Web.Router do
   end
 
   get "/" do
-    send_resp(conn, 200, "Hello" |> Html.control_page)
+    case GameState.state do
+      :started -> send_resp(conn, 200, "Hello" |> Html.control_page)
+      :unstarted -> send_resp(conn, 200, Html.unstarted)
+      :finished -> send_resp(conn, 200, Html.finished)
+    end
   end
 
   get "/cultivatormobile.css" do
     send_resp(conn, 200, Html.css)
+  end
+
+  post "start" do
+    GameState.start
+    redirect_home(conn)
+  end
+
+  post "reset" do
+    GameState.reset
+    redirect_home(conn)
   end
 
   post "fire" do

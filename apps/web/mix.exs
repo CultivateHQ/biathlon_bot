@@ -25,6 +25,7 @@ defmodule Web.Mixfile do
       {:cowboy, ">= 0.0.0"},
       {:locomotion, in_umbrella: true},
       {:laser, in_umbrella: true},
+      {:game_state, in_umbrella: true},
     ]
   end
 end
