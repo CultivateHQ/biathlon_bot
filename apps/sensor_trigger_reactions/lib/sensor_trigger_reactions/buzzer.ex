@@ -16,16 +16,16 @@ defmodule SensorTriggerReactions.Buzzer do
 
     GPIO.write(pid, 1)
 
-    Events.subscribe(:light_level_triggers)
+    Events.subscribe("light_level_triggers")
     {:ok, pid}
   end
 
-  def handle_info({:event, :light_level_triggers, :triggered}, pin_pid) do
+  def handle_info({:event, "light_level_triggers", :triggered}, pin_pid) do
     GPIO.write(pin_pid, 0)
     Process.send_after(self(), :stop_buzzing, @buzz_for)
     {:noreply, pin_pid}
   end
-  def handle_info({:event, :light_level_triggers, _}, pin_pid), do: {:noreply, pin_pid}
+  def handle_info({:event, "light_level_triggers", _}, pin_pid), do: {:noreply, pin_pid}
 
   def handle_info(:stop_buzzing, pin_pid) do
     GPIO.write(pin_pid, 1)

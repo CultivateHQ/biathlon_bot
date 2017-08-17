@@ -7,7 +7,7 @@ defmodule SensorTriggerReactions.BuzzerTest do
 
   test "sets pin to low when triggered" do
     GPIO.write(pin(), 1)
-    send(Buzzer, {:event, :light_level_triggers, :triggered})
+    send(Buzzer, {:event, "light_level_triggers", :triggered})
     :sys.get_state(Buzzer)
     assert 0 == GPIO.read(pin())
   end

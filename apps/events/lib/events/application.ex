@@ -7,7 +7,8 @@ defmodule Events.Application do
     import Supervisor.Spec, warn: false
 
     children = [
-      supervisor(Registry, [:duplicate,  :events_registry]),
+      # supervisor(Registry, [:duplicate,  :events_registry]),
+      supervisor(Phoenix.PubSub.PG2, [:events_registry, []]),
     ]
 
     opts = [strategy: :one_for_one, name: Events.Supervisor]
