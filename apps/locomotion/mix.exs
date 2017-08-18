@@ -23,7 +23,7 @@ defmodule Locomotion.Mixfile do
   defp deps do
     [
       {:elixir_ale, "~> 1.0.0", only: :prod},
-      {:dummy_nerves, path: "../../../dummy_nerves", only: [:dev, :test]}, # replace with git / hex link
+      {:dummy_nerves, git: "https://github.com/CultivateHQ/dummy_nerves.git", only: [:dev, :test]},
     ]
   end
 end

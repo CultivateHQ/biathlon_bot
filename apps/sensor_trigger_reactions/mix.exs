@@ -27,7 +27,7 @@ defmodule SensorTriggerReactions.Mixfile do
   defp deps do
     [
       {:events, in_umbrella: true},
-      {:dummy_nerves, path: "../../../dummy_nerves", only: [:dev, :test]}, # replace with git / hex link
+      {:dummy_nerves, git: "https://github.com/CultivateHQ/dummy_nerves.git", only: [:dev, :test]},
     ]
   end
 end

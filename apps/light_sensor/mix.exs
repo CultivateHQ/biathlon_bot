@@ -26,7 +26,7 @@ defmodule LightSensor.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:dummy_nerves, path: "../../../dummy_nerves", only: [:dev, :test]}, # replace with git / hex link
+      {:dummy_nerves, git: "https://github.com/CultivateHQ/dummy_nerves.git", only: [:dev, :test]},
       {:elixir_ale, "~> 1.0", only: :prod},
       {:events, in_umbrella: true},
     ]
