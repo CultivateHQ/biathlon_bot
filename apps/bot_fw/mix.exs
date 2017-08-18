@@ -66,9 +66,9 @@ defmodule BotFw.Mixfile do
   # Specify target specific dependencies
   def deps("host"), do: []
   def deps(target) do
-    [ system(target),
-      {:bootloader, "~> 0.1"},
-      {:nerves_runtime, "~> 0.4"}
+    [system(target),
+     {:bootloader, "~> 0.1"},
+     {:nerves_runtime, "~> 0.4"}
     ]
   end
 

@@ -1,6 +1,10 @@
 defmodule Wifi.DistributeNode do
   use GenServer
 
+  @moduledoc """
+   fer
+  """
+
   require Logger
 
   @name __MODULE__

@@ -1,4 +1,9 @@
 defmodule LightSensor.LightLevelMonitor do
+  @moduledoc """
+  Measures the light level coming in over the SPI interface. We assume that
+  """
+
+
   use GenServer
 
   alias ElixirALE.SPI
@@ -32,7 +37,6 @@ defmodule LightSensor.LightLevelMonitor do
   defp alert_if_needed(false, true), do: Events.broadcast("light_level_triggers", :triggered)
   defp alert_if_needed(true, false), do: Events.broadcast("light_level_triggers", :untriggered)
   defp alert_if_needed(_, _), do: nil
-
 
   defp read(spi_address) do
     SPI

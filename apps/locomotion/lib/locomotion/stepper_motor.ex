@@ -116,7 +116,7 @@ defmodule Locomotion.StepperMotor do
   end
 
   defp new_position(position, :forward, current_step) do
-    (position + current_step) |> rem(8)
+    rem(position + current_step, 8)
   end
 
   defp new_position(position, :back, current_step) do

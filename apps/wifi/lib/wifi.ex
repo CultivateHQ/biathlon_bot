@@ -1,14 +1,25 @@
 defmodule Wifi do
   @moduledoc """
-  Documentation for Wifi.
+  Enables overriding of firmware WiFi options. Note that I can't be bothered supporting
+  networks without security.
   """
 
   alias Wifi.{Settings, NetworkWrapperSupervisor, NetworkWrapper}
 
+  @type ssid :: String.t
+  @type secret :: String.t
+
+  @doc """
+  Override existing `ssid` and `secret`. The current WiFi is terminated and will be replaced with the new settings.
+
+  The settings are persisted between boots.
+  """
+  @spec set(ssid, secret) :: :ok
   def set(ssid, secret) do
     Settings.set(settings_file(), {ssid, secret})
     Supervisor.terminate_child(NetworkWrapperSupervisor, NetworkWrapper)
     {:ok, _pid} =  Supervisor.restart_child(NetworkWrapperSupervisor, NetworkWrapper)
+    :ok
   end
 
   def settings_file() do

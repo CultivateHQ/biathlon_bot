@@ -6,7 +6,7 @@ defmodule Wifi.MulticastConnectNodes do
   require Logger
 
   @ip {224, 1, 1, 1}
-  @port 49999
+  @port 49_999
   @name __MODULE__
   @broadcast_inverval 1_000
 
@@ -20,14 +20,14 @@ defmodule Wifi.MulticastConnectNodes do
     udp_options = [
       :binary,
       active:          10,
-      add_membership:  {@ip, {0,0,0,0} },
-      multicast_if:    {0, 0, 0,0 },
+      add_membership:  {@ip, {0, 0, 0, 0}},
+      multicast_if:    {0, 0, 0, 0},
       multicast_loop:  false,
       multicast_ttl:   4,
       reuseaddr:       true
     ]
     send(self(), :broadcast)
-    {:ok, socket} = :gen_udp.open(49999, udp_options)
+    {:ok, socket} = :gen_udp.open(@port, udp_options)
     {:ok, %__MODULE__{socket: socket, my_name: my_name}}
   end
 
@@ -43,7 +43,7 @@ defmodule Wifi.MulticastConnectNodes do
   end
 
   def handle_info(msg = {:udp, socket, _ip, _port, _data}, state) do
-    Logger.debug "Unexpected incomping udp: #{inspect(msg)}"
+    Logger.debug fn -> "Unexpected incomping udp: #{inspect(msg)}" end
     :inet.setopts(socket, [active: 1])
     {:noreply, state}
   end

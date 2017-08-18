@@ -1,12 +1,22 @@
 defmodule SensorTriggerReactions.Buzzer do
   use GenServer
 
+  @moduledoc """
+  Buzzes for 3/4 second on receiving the message that the light level has been triggered.
+
+  The buzzer activates when the GPIO pin is set to low, so the pin is set to high on initialisation.
+  """
+
   @name __MODULE__
 
   alias ElixirALE.GPIO
 
   @buzz_for 750
 
+  @doc """
+  Receives the GPIO pin number to which the buzzer is attached.
+  """
+  @spec start_link(integer) :: {:ok, pid}
   def start_link(buzzer_pin) do
     GenServer.start_link(__MODULE__, buzzer_pin, name: @name)
   end
@@ -15,7 +25,6 @@ defmodule SensorTriggerReactions.Buzzer do
     {:ok, pid} = GPIO.start_link(buzzer_pin, :output)
 
     GPIO.write(pid, 1)
-
     Events.subscribe("light_level_triggers")
     {:ok, pid}
   end

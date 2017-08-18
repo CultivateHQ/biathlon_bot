@@ -1,7 +1,11 @@
 defmodule Wifi.Ntp do
-  @doc """
-  `ntpd` can be used to set time, but it now no longer returns if it cannot resolve the timeserver.
-  This can be a problem is the network isn't up yet.
+  @moduledoc """
+  This polls every second until the time is set, then every 30 minutes afterwards. `ntpd` is attempted to be used at each poll
+  to set the time, using the configured timeserver.
+
+  `ntpd` it now no longer returns if it cannot resolve the timeserver. This can be a problem is the network isn't up yet. So
+  before attempting to call `ntpd` we try and resolve the first server using `:inet.gethostbyname/1` and only call `ntpd` if the
+  resolution works.
   """
 
   @name __MODULE__
@@ -13,7 +17,7 @@ defmodule Wifi.Ntp do
 
   defstruct ntp_args: nil, first_server: nil, time_set: true
 
-  def start_link(ntp_servers) do
+  def start_link(ntp_servers) when length(ntp_servers) > 1 do
     GenServer.start_link(__MODULE__, ntp_servers, name: @name)
   end
 

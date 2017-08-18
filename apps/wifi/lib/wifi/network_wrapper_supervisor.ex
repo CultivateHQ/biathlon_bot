@@ -1,4 +1,6 @@
 defmodule Wifi.NetworkWrapperSupervisor do
+  @moduledoc false
+
   use Supervisor
 
   def start_link do

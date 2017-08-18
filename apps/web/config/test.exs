@@ -1,6 +1,5 @@
 use Mix.Config
 
-
 config :web, :cowboy_options, [
-  port: 43903,
+  port: 43_903,
 ]

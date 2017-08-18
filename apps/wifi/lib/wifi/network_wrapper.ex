@@ -1,4 +1,15 @@
 defmodule Wifi.NetworkWrapper do
+  @moduledoc """
+  Responsible for setting up WiFi with `Nerves.Network`.
+
+  Uses `WiFi.Settings` to access the WiFi config in such a way that the SSID and secret can be overwritten
+  without having to replace the firmware image.
+
+  By setting up the WiFi in a process we can take the connection down and create a new one when the SSSID
+  and secret are changed with `Wifi.set/2`.
+
+  """
+
   use GenServer
   require Logger
 
@@ -6,6 +17,9 @@ defmodule Wifi.NetworkWrapper do
 
   @name __MODULE__
 
+  @doc """
+  The settings file is the one used to store any changed SSID and secret settings.
+  """
   def start_link(settings_file) do
     GenServer.start_link(__MODULE__, settings_file, name: @name)
   end
@@ -14,9 +28,6 @@ defmodule Wifi.NetworkWrapper do
     kernel_init()
 
     wifi_opts = Settings.read_settings(settings_file)
-
-    Logger.debug "Starting WiFi with #{inspect(wifi_opts)}"
-
 
     {:ok, _} = Nerves.Network.setup("wlan0", wifi_opts)
     {:ok, {}}
