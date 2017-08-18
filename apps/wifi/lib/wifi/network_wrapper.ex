@@ -25,22 +25,9 @@ defmodule Wifi.NetworkWrapper do
   end
 
   def init(settings_file) do
-    kernel_init()
-
     wifi_opts = Settings.read_settings(settings_file)
 
     {:ok, _} = Nerves.Network.setup("wlan0", wifi_opts)
     {:ok, {}}
-  end
-
-  # Is this the kind of thing Bootloader is for?
-  if Mix.env == :prod do
-    defp kernel_init do
-      {_, 0} = System.cmd("modprobe", ["brcmfmac"])
-      {_, 0} = System.cmd("epmd", ["-daemon"])
-      :ok
-    end
-  else
-    defp kernel_init, do: :ok
   end
 end

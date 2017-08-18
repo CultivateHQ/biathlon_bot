@@ -1,4 +1,3 @@
-# BiathlonBot
+# The Biathlon Bot
 
-**TODO: Add description**
-
+A twist on the [Battlebot]

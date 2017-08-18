@@ -1,6 +1,14 @@
 defmodule Wifi.MulticastConnectNodes do
   @moduledoc """
-  Based heavily on https://dbeck.github.io/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/
+  Based heavily on https://dbeck.github.io/Scalesmall-W5-UDP-Multicast-Mixed-With-TCP/, and when I say based I mean cargo culted.
+  I don't know much about UDP multicast.
+
+  * every second broadcasts to the UDP multicast group 224.1.1.1 on prot 49999 the name of this node
+  * listens for those same broadcasts from other nodes. When one is found, which is not in the current node list, attempts to connect
+  to the received node name at the received ip.
+
+  This is highly insecure and as atoms must be constructed to bind to the appropriate id, it is also makes us subject
+  to attack by filling up the atom table space, even without knowing the shared cookie.
   """
   use GenServer
   require Logger
