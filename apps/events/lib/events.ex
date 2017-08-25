@@ -8,6 +8,7 @@ defmodule Events do
   @doc """
   Subscribe the current process to the topic
   """
+  @spec subscribe(binary) :: :ok | {:error, any}
   def subscribe(topic) do
     # Registry.register(:events_registry, topic, [])
     PubSub.subscribe(:events_registry, topic)
@@ -17,6 +18,7 @@ defmodule Events do
   Broadcast an event to the topic. The topic receives
   {:event, topic, event}
   """
+  @spec broadcast(binary, any) :: :ok | {:error, any}
   def broadcast(topic, event) do
     # Registry.dispatch(:events_registry, topic, fn entries ->
     #   for {pid, _} <- entries, do: send(pid, {:event, topic, event})
