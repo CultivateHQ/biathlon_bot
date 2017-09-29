@@ -22,6 +22,10 @@ defmodule Wifi do
     :ok
   end
 
+  @doc """
+  The path to the settings file
+  """
+  @spec settings_file() :: String.t
   def settings_file() do
     Application.fetch_env!(:wifi, :settings_file)
   end

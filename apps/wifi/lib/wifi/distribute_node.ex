@@ -18,6 +18,11 @@ defmodule Wifi.DistributeNode do
 
   @name __MODULE__
 
+  @doc """
+  Start with the `node_name`. On receiving a dhcp ipv4 address it will
+  bind to `node_name`@current_ip
+  """
+  @spec start_link(String.t) :: {:ok, pid}
   def start_link(node_name) do
     GenServer.start_link(__MODULE__, node_name, name: @name)
   end

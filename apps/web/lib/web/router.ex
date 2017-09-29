@@ -3,6 +3,10 @@ defmodule Web.Router do
   A Plug router that acts as an interface to control the robot. The
   control page is displayed initially with `get /`. All state changing operations
   are posts.
+
+  There's some last minute hacks here around game state. Much of the logic
+  doesn't really belong here at all, but I haven't got round to cleaning it up
+  (because there's real work to do).
   """
 
   use Plug.Router

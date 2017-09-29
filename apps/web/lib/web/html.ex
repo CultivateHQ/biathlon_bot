@@ -1,6 +1,6 @@
 defmodule Web.Html do
   @moduledoc """
-  Provides the css and html for the Saxophone web control page. Used in Saxophone.Web.Router
+  Provides the css and html for the web control page. Used in Web.Router
   """
 
   @compiled_at :calendar.universal_time

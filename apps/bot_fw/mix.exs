@@ -1,10 +1,13 @@
 defmodule BotFw.Mixfile do
   use Mix.Project
 
-  @target (case Mix.env do
-             :prod -> "rpi0"
-             _ -> "host"
-           end)
+  default_target = fn -> case Mix.env do
+                           :prod -> "rpi0"
+                           _ -> "host"
+                         end
+  end
+
+  @target System.get_env("MIX_TARGET") || default_target.()
 
   Mix.shell.info([:green, """
   Mix environment

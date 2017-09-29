@@ -17,6 +17,7 @@ defmodule Wifi.Ntp do
 
   defstruct ntp_args: nil, first_server: nil, time_set: true
 
+  @spec start_link(list(String.t)) :: {:ok, pid}
   def start_link(ntp_servers) when length(ntp_servers) > 1 do
     GenServer.start_link(__MODULE__, ntp_servers, name: @name)
   end

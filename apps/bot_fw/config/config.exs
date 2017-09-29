@@ -22,5 +22,7 @@ use Mix.Config
 if Mix.env == :prod do
   config :bootloader,
     init: [:nerves_runtime],
-    app: Mix.Project.config()[:app]
+    app: Mix.Project.config[:app]
 end
+
+IO.inspect Mix.Project.config[:app]

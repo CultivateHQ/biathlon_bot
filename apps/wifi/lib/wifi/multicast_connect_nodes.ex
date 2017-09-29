@@ -20,6 +20,11 @@ defmodule Wifi.MulticastConnectNodes do
 
   defstruct socket: nil, my_name: nil
 
+  @doc """
+  Start. `my_name` is broadcast every second. The listening nodes
+  will recreate the fully node name as `my_name`@[broadcaster's ip]
+  """
+  @spec start_link(String.t) :: {:ok, pid}
   def start_link(my_name) do
     GenServer.start_link(__MODULE__, my_name, name: @name)
   end
@@ -41,7 +46,9 @@ defmodule Wifi.MulticastConnectNodes do
 
 
   def handle_info({:udp, socket, {ip1, ip2, ip3, ip4}, _port, "iamnode:" <> node}, state) do
-    incoming_node = String.to_atom("#{node}@#{ip1}.#{ip2}.#{ip3}.#{ip4}") #ddos memory attack alert! What to do?
+    # This is very vulnerable to atom table exhaustion attack. Do not use on
+    # anything approaching a non-toy sytem.
+    incoming_node = String.to_atom("#{node}@#{ip1}.#{ip2}.#{ip3}.#{ip4}") 
     unless incoming_node  in Node.list do
       node_connect(incoming_node)
     end
